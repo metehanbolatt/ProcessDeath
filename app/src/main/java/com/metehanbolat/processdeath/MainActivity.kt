@@ -3,11 +3,13 @@ package com.metehanbolat.processdeath
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import com.metehanbolat.processdeath.ui.theme.ProcessDeathTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,9 +17,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ProcessDeathTheme {
-
-                Surface(color = MaterialTheme.colors.background) {
-                    
+                val viewModel by viewModels<MainViewModel>()
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Button(onClick = { viewModel.count() }) {
+                        Text(text = "You clicked me ${viewModel.counter} times")
+                    }
                 }
             }
         }
